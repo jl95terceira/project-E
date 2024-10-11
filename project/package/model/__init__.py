@@ -6,6 +6,8 @@ from ..          import words
 from ..batteries import Enumerator
 from ..util      import Named
 
+NonSource = typing.Union['Comment',str]
+
 class ClassType(Named): pass
 class ClassTypes:
 
@@ -51,13 +53,17 @@ class Package:
     name:str = dataclasses.field()
 
 @dataclasses.dataclass
+class PackageNonSource:
+
+    pos1:list[NonSource] = dataclasses.field(default_factory=list) # before 'package'
+    pos2:list[NonSource] = dataclasses.field(default_factory=list) # after 'package' before package name
+    pos3:list[NonSource] = dataclasses.field(default_factory=list) # after package name before semi-colon
+
+@dataclasses.dataclass
 class Import:
 
     name  :str  = dataclasses.field()
     static:bool = dataclasses.field(default=False)
-
-    @typing.override
-    def source(self): return f'{words.IMPORT} {'' if not self.static else f'{words.STATIC} '}{self.name};'
 
 @dataclasses.dataclass
 class Annotation:

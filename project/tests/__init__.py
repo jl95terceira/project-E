@@ -143,7 +143,8 @@ class _TestHandler(entity.Handler):
         self._tc.assertEqual(self._i, len(self._tr.a), msg=f'expected no more entities to be process but there are {len(self._tr.a) - self._i} remaining')
 
     @typing.override
-    def handle_package           (self, package         :model.Package)             : self._test(lambda tr: tr.packages             , package)
+    def handle_package           (self, package         :model.Package,
+                                        non_source      :model.PackageNonSource)    : self._test(lambda tr: tr.packages             , package)
     @typing.override
     def handle_import            (self, import_         :model.Import)              : self._test(lambda tr: tr.imports              , import_)
     @typing.override

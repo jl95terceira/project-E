@@ -6,9 +6,11 @@ from ..  import model, handlers
 class StreamPrinter(handlers.entity.Handler):
 
     @typing.override
-    def handle_package           (self, package:model.Package):
+    def handle_package           (self, package   :model.Package, 
+                                        non_source:model.PackageNonSource):
 
         print(f'Handling package:               {package}')
+        print(f'                                {non_source}')
 
     @typing.override
     def handle_import            (self, import_:model.Import):
